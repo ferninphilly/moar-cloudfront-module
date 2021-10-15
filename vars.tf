@@ -22,3 +22,8 @@ variable "sns_error_topic_arn" {
     description = "This is where errors are going"
     type = string
 }
+
+variable "certificate" {
+  description = "The aws certificate that you created in us-east-1 for cloudfront (outside of terraform)"
+  type = string
+}

@@ -1,32 +1,5 @@
 /* cloudfront */
 
-locals {
-  certificates = {
-    dev = "arn:aws:acm:us-east-1:758924794885:certificate/7c3e9081-97c8-4e83-86cc-3e05209ab000"
-    uat = "arn:aws:acm:us-east-1:699573796741:certificate/6597da2c-3037-47e1-b43d-fde87c527b28"
-  }
-}
-
-resource "aws_route53_zone" "zone" {
-  name = var.domain_name
-
-  tags = {
-    Environment = var.environment
-  }
-}
-
-// This Route53 record will point at our CloudFront distribution.
-resource "aws_route53_record" "www" {
-  zone_id = aws_route53_zone.zone.zone_id
-  name    = ""
-  type    = "A"
-
-  alias {
-    name                   = aws_cloudfront_distribution.cf.domain_name
-    zone_id                = aws_cloudfront_distribution.cf.hosted_zone_id
-    evaluate_target_health = false
-  }
-}
 
 resource "aws_cloudfront_distribution" "cf" {
   // origin is where CloudFront gets its content from.
@@ -83,7 +56,7 @@ resource "aws_cloudfront_distribution" "cf" {
 
   // Here's where our certificate is loaded in!
   viewer_certificate {
-    acm_certificate_arn = local.certificates[var.environment]
+    acm_certificate_arn = var.certificate
     ssl_support_method  = "sni-only"
   }
 }
