@@ -7,6 +7,14 @@ locals {
   }
 }
 
+resource "aws_route53_zone" "zone" {
+  name = var.domain_name
+
+  tags = {
+    Environment = var.environment
+  }
+}
+
 resource "aws_cloudfront_distribution" "cf" {
   // origin is where CloudFront gets its content from.
   origin {
