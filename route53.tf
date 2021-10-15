@@ -9,7 +9,7 @@ resource "aws_route53_zone" "zone" {
 // This Route53 record will point at our CloudFront distribution.
 resource "aws_route53_record" "www" {
   zone_id = aws_route53_zone.zone.zone_id
-  name    = var.client
+  name    = ""
   type    = "A"
 
   alias {
