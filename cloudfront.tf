@@ -3,7 +3,7 @@
 locals {
   certificates = {
     dev = "arn:aws:acm:us-east-1:758924794885:certificate/7c3e9081-97c8-4e83-86cc-3e05209ab000"
-    uat = "arn:aws:acm:us-east-1:699573796741:certificate/5bdcc8eb-c381-48fd-be9b-6c5dac2b200c"
+    uat = "arn:aws:acm:us-east-1:699573796741:certificate/6597da2c-3037-47e1-b43d-fde87c527b28"
   }
 }
 
