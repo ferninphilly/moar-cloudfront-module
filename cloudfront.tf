@@ -15,6 +15,19 @@ resource "aws_route53_zone" "zone" {
   }
 }
 
+// This Route53 record will point at our CloudFront distribution.
+resource "aws_route53_record" "www" {
+  zone_id = aws_route53_zone.zone.zone_id
+  name    = ""
+  type    = "A"
+
+  alias {
+    name                   = aws_cloudfront_distribution.cf.domain_name
+    zone_id                = aws_cloudfront_distribution.cf.hosted_zone_id
+    evaluate_target_health = false
+  }
+}
+
 resource "aws_cloudfront_distribution" "cf" {
   // origin is where CloudFront gets its content from.
   origin {
