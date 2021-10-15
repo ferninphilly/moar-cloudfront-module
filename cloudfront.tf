@@ -3,7 +3,7 @@
 
 resource "aws_cloudfront_distribution" "cf" {
   // origin is where CloudFront gets its content from.
-  description = "Cloudfront Distribution for ${var.client} in the ${var.environment} environment"
+  comment = "Cloudfront Distribution for ${var.client} in the ${var.environment} environment"
   origin {
     // We need to set up a "custom" origin because otherwise CloudFront won't
     // redirect traffic from the root domain to the www domain, that is from
