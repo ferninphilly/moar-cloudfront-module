@@ -22,7 +22,7 @@ resource "aws_cloudfront_distribution" "cf" {
     }
 
     // Here we're using our S3 bucket's URL!
-    domain_name = aws_s3_bucket.moar_website.website_endpoint
+    domain_name = var.s3bucket_endpoint
     // This can be any name to identify this origin.
     origin_id   = var.domain_name
   }
