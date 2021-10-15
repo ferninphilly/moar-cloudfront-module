@@ -1,7 +1,13 @@
 /* cloudfront */
 
+locals {
+  certificates = {
+    dev = "arn:aws:acm:us-east-1:758924794885:certificate/7c3e9081-97c8-4e83-86cc-3e05209ab000"
+    uat = "arn:aws:acm:us-east-1:699573796741:certificate/5bdcc8eb-c381-48fd-be9b-6c5dac2b200c"
+  }
+}
+
 resource "aws_cloudfront_distribution" "cf" {
-  comment = "Cloudfront distribution for ${var.client} in the ${var.environment} environment"
   // origin is where CloudFront gets its content from.
   origin {
     // We need to set up a "custom" origin because otherwise CloudFront won't
@@ -16,7 +22,7 @@ resource "aws_cloudfront_distribution" "cf" {
     }
 
     // Here we're using our S3 bucket's URL!
-    domain_name = var.s3bucket_endpoint
+    domain_name = aws_s3_bucket.moar_website.website_endpoint
     // This can be any name to identify this origin.
     origin_id   = var.domain_name
   }
@@ -56,7 +62,7 @@ resource "aws_cloudfront_distribution" "cf" {
 
   // Here's where our certificate is loaded in!
   viewer_certificate {
-    acm_certificate_arn = aws_acm_certificate.cert.arn
+    acm_certificate_arn = local.certificates[var.environment]
     ssl_support_method  = "sni-only"
   }
 }
