@@ -39,6 +39,7 @@ resource "aws_cloudfront_distribution" "cf" {
 
     forwarded_values {
       query_string = false
+      headers = ["*"]
       cookies {
         forward = "none"
       }

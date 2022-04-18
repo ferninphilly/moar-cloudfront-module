@@ -35,3 +35,4 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront-400-errors" {
     Region         = "Global"
   }
 }
+
