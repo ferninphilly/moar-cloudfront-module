@@ -1,5 +1,10 @@
 /* cloudfront */
 
+resource "aws_cloudfront_origin_access_identity" "cf_oai" {
+  provider = aws.main
+
+  comment = "OAI to restrict access to AWS S3 content"
+}
 
 resource "aws_cloudfront_distribution" "cf" {
   // origin is where CloudFront gets its content from.
@@ -17,7 +22,7 @@ resource "aws_cloudfront_distribution" "cf" {
     // This can be any name to identify this origin.
     origin_id   = var.domain_name
     s3_origin_config {
-      origin_access_identity = "origin-access-identity/cloudfront/ABCDEFG1234567"
+      origin_access_identity = aws_cloudfront_origin_access_identity.cf_oai.cloudfront_access_identity_path
     }
   }
 
