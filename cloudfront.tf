@@ -31,14 +31,13 @@ resource "aws_cloudfront_distribution" "cf" {
   default_cache_behavior {
     viewer_protocol_policy = "redirect-to-https"
     compress               = true
-    allowed_methods        = ["GET", "HEAD", "OPTIONS"]
-    cached_methods         = ["GET", "HEAD", "OPTIONS"]
+    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    cached_methods   = ["GET", "HEAD"]
+    min_ttl                = 0
+    default_ttl            = 3600
+    max_ttl                = 86400
     // This needs to match the `origin_id` above.
     target_origin_id       = var.domain_name
-    min_ttl                = 0
-    default_ttl            = 0
-    max_ttl                = 0
-
     forwarded_values {
       query_string = false
       cookies {
