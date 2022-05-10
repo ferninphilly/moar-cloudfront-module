@@ -40,6 +40,7 @@ resource "aws_cloudfront_distribution" "cf" {
     target_origin_id       = var.domain_name
     forwarded_values {
       query_string = false
+      headers = []
       cookies {
         forward = "none"
       }
