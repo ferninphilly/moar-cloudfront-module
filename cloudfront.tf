@@ -56,6 +56,23 @@ resource "aws_cloudfront_distribution" "cf" {
       restriction_type = "none"
     }
   }
+  custom_error_response {
+    error_code            = 403
+    response_code         = 200
+    error_caching_min_ttl = 0
+    response_page_path    = "/"
+  }
+
+  custom_error_response {
+    error_code            = 404
+    response_code         = 200
+    error_caching_min_ttl = 0
+    response_page_path    = "/"
+  }
+
+  wait_for_deployment = false
+  tags                = var.tags
+}
 
   // Here's where our certificate is loaded in!
   viewer_certificate {
