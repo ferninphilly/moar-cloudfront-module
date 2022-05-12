@@ -70,10 +70,6 @@ resource "aws_cloudfront_distribution" "cf" {
     response_page_path    = "/"
   }
 
-  wait_for_deployment = false
-  tags                = var.tags
-}
-
   // Here's where our certificate is loaded in!
   viewer_certificate {
     acm_certificate_arn = var.certificate
