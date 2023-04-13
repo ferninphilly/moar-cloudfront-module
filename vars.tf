@@ -27,3 +27,14 @@ variable "certificate" {
   description = "The aws certificate that you created in us-east-1 for cloudfront (outside of terraform)"
   type = string
 }
+
+variable "lambda_association" {
+  description = "Is there a lambda associated with the cloudfront endpoint?"
+  type = bool
+  default = false
+}
+
+variable "lambda_endpoint" {
+  description = "If Lambda Association is true then this is the endpoint of the lambda we're hitting"
+  type = string
+}
