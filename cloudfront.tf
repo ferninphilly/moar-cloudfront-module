@@ -40,7 +40,6 @@ resource "aws_cloudfront_distribution" "cf" {
       for_each = var.lambda_association == true ? [1] : [0]
       event_type   = "origin-response"
       lambda_arn   = var.lambda_endpoint
-      include_body = false
     }
     // This needs to match the `origin_id` above.
     target_origin_id       = var.domain_name
