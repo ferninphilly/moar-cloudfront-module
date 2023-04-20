@@ -28,18 +28,7 @@ variable "certificate" {
   type = string
 }
 
-variable "lambda_association" {
-  description = "Is there a lambda associated with the cloudfront endpoint?"
-  type = bool
-  default = false
-}
-
-variable "lambda_endpoint" {
+variable "lambda_arn" {
   description = "If Lambda Association is true then this is the endpoint of the lambda we're hitting"
   type = string
-}
-
-variable "lambda_version" {
-  type = string
-  description = "This is the lambda versioning necessary for the cloudfront module to function"
 }

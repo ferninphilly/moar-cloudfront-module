@@ -36,11 +36,9 @@ resource "aws_cloudfront_distribution" "cf" {
     min_ttl                = 0
     default_ttl            = 3600
     max_ttl                = 86400
-    lambda_function_association {
-    #  for_each = var.lambda_association == true ? [1] : [0]
-      event_type   = "origin-response"
-      lambda_arn   = "${var.lambda_endpoint}:${var.lambda_version}"
-      include_body = true
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = var.lambda_arn
     }
     // This needs to match the `origin_id` above.
     target_origin_id       = var.domain_name
