@@ -38,3 +38,8 @@ variable "lambda_endpoint" {
   description = "If Lambda Association is true then this is the endpoint of the lambda we're hitting"
   type = string
 }
+
+variable "lambda_version" {
+  type = string
+  description = "This is the lambda versioning necessary for the cloudfront module to function"
+}

@@ -39,7 +39,7 @@ resource "aws_cloudfront_distribution" "cf" {
     lambda_function_association {
     #  for_each = var.lambda_association == true ? [1] : [0]
       event_type   = "origin-response"
-      lambda_arn   = var.lambda_endpoint
+      lambda_arn   = "${var.lambda_endpoint}:${var.lambda_version}"
       include_body = true
     }
     // This needs to match the `origin_id` above.
