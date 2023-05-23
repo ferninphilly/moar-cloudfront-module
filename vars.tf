@@ -13,11 +13,6 @@ variable "domain_name" {
     type = string
 }
 
-variable "s3bucket_endpoint" {
-    description = "This is the s3 bucket endpoint starting with http"
-    type = string
-}
-
 variable "sns_error_topic_arn" {
     description = "This is where errors are going"
     type = string
