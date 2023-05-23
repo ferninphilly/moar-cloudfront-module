@@ -16,12 +16,9 @@ resource "aws_cloudfront_distribution" "cf" {
     #   origin_ssl_protocols   = ["TLSv1", "TLSv1.1", "TLSv1.2"]
     # }
 
-    domain_name = var.s3bucket_endpoint
+    domain_name = var.lambda_url_domain
     // This can be any name to identify this origin.
     origin_id   = var.domain_name
-    s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.cf_oai.cloudfront_access_identity_path
-    }
   }
 
   enabled             = true
@@ -36,12 +33,6 @@ resource "aws_cloudfront_distribution" "cf" {
     min_ttl                = 0
     default_ttl            = 3600
     max_ttl                = 86400
-#     lambda_function_association {
-#     #  for_each = var.lambda_association == true ? [1] : [0]
-#       event_type   = "origin-response"
-#       lambda_arn   = var.lambda_endpoint
-#       include_body = true
-#     }
     // This needs to match the `origin_id` above.
     target_origin_id       = var.domain_name
     forwarded_values {

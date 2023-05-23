@@ -28,6 +28,11 @@ variable "certificate" {
   type = string
 }
 
+variable "lambda_url_domain" {
+  description = "This is the lambda url that we're pointed to; get it from the lambda_url terraform object"
+  type = string
+}
+
 # variable "lambda_association" {
 #   description = "Is there a lambda associated with the cloudfront endpoint?"
 #   type = bool
